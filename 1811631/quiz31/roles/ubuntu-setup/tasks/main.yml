@@ -1,0 +1,68 @@
+---
+# tasks file for roles/ubuntu-setup
+  - name: Install vsftpd
+    become: yes
+    apt:
+      name: vsftpd
+      state: latest
+      update_cache: yes
+
+  - name: Change the state of firewall
+    become: yes
+    service:
+      name: ufw
+      state: stopped
+      enabled: no
+
+  - name: Create FTPUser
+    become: yes
+    user:
+      name: gjgerandoy-ftp
+      password: $6$1Qb32teoyULI35P$T/NmaQ8ixIZId4TkpIVUMk627p1HsRTG21yiYFgA6kGYxb1DbTs1RljllrneWB8doYbnIfNsbwOI0uouw4K2s/
+      comment: "FTP user"
+
+  - name: add DenyUsers
+    become: yes
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      line: "DenyUsers gjgerandoy-ftp"
+    register: sshd_config
+
+  - name: restart sshd service
+    become: yes
+    service:
+      name: sshd
+      state: restarted
+    when: sshd_config.changed
+
+  - name: Create FTP Dir
+    become: yes
+    file:
+      path: /home/gjgerandoy-ftp/ftp
+      state: directory
+      owner: nobody
+      group: nogroup
+      mode: '0555'
+
+  - name: Create files dir
+    become: yes
+    file:
+      path: /home/gjgerandoy-ftp/files
+      state: directory
+      owner: gjgerandoy-ftp
+      group: gjgerandoy-ftp
+
+  - name: Copy vsftpd.conf
+    become: yes
+    copy:
+      src: vsftpd.conf
+      dest: /etc/vsftpd.conf
+    register: vsftpd_config
+
+  - name: Restart vsftpd.conf
+    become: yes
+    service:
+      name: vsftpd
+      state: restarted
+    when: vsftpd_config.changed
+  
