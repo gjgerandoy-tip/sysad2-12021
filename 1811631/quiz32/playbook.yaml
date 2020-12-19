@@ -1,0 +1,20 @@
+---
+  - name: install httpd server and configure
+    hosts: ubuntu
+    roles:
+      - ubuntu-setup
+
+  - name: copy file
+    hosts: centos
+    tasks:
+
+      - name: copy file
+        copy:
+          src: quiz32.com.conf
+          dest: /etc/httpd/sites-available/
+    
+
+  - name: install httpd server and configure
+    hosts: centos
+    roles:
+     - centos-setup
