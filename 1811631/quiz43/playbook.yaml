@@ -1,8 +1,8 @@
 ---
-#- name: Install Elastic stack in ubuntu
-#  hosts: ubuntu
-#  roles:
-#    - ubuntu-monitor/elk
+- name: Install Elastic stack in ubuntu
+  hosts: ubuntu
+  roles:
+   - ubuntu-monitor/elk
 
 - name: Install Elastic stack in centos#  
   hosts: centos
