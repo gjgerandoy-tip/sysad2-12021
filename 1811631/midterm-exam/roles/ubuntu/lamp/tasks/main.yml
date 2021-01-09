@@ -1,0 +1,63 @@
+---
+# tasks file for roles/ubuntu/lamp
+
+- name: Install the apache
+  become: yes
+  apt:
+    name: apache2
+    state: present
+    update_cache: yes
+
+- name: Start the apache2 service in ubuntu
+  become: yes
+  service:
+    name: apache2
+    state: restarted
+    enabled: yes
+
+- name: Allow UFW in the apache2
+  become: yes
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+    state: enabled
+
+- name: Installing the mysql server
+  become: yes
+  apt:
+    name: mysql-server
+    state: present
+
+- name: Installing PHP Packages
+  become: yes
+  apt:
+    name:
+      - php
+      - php-mysql
+      - libapache2-mod-php
+
+- name: Creating index.html
+  become: yes
+  copy:
+    content: "<h1> Test2 </h1> <br> Created index.html"
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Test the PHP
+  become: yes
+  copy:
+    src: ubuntu/edit.html
+    dest: /var/www/html/info.php
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install the mariaDB
+  become: yes
+  apt:
+    name: mariadb-server-10.3
+    state: present
+    update_cache: yes

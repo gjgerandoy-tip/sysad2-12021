@@ -1,0 +1,56 @@
+---
+# tasks file for roles/ubuntu/gpi
+- name: Add the key to package
+  become: yes
+  apt_key:
+    url: https://packages.grafana.com/gpg.key
+    state: present
+
+- name: Add the grafana repository
+  become: yes
+  shell: echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+- name: Update the Ubuntu
+  become: yes
+  apt:
+    upgrade: 'yes'
+    update_cache: yes
+
+- name: Install grafana
+  become: yes
+  apt:
+    name: grafana
+    state: present
+
+- name: Install the prometheus and plugins
+  become: yes
+  apt:
+    name:
+      - prometheus
+      - prometheus-node-exporter
+
+- name: Add the influxdb repo
+  become: yes
+  copy:
+    content: "deb https://repos.influxdata.com/ubuntu focal stable"
+    dest: /etc/apt/sources.list.d/influxdb.list
+
+- name: Updating the GPG key
+  become: yes
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name:  Update the ubuntu for influxDB
+  become: yes
+  apt:
+    upgrade: 'yes'
+    update_cache: yes
+
+- name: Install the influxdb
+  become: yes
+  apt:
+    name: influxdb
+    state: present
+
+

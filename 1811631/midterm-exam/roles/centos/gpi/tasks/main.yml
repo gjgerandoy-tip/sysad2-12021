@@ -1,0 +1,64 @@
+---
+# tasks file for roles/centos/gpi
+
+- name: Adding the grafana.repo
+  become: yes
+  copy:
+    src: centos/grafana.repo
+    dest: /etc/yum.repos.d/
+
+- name: Update the centos
+  become: yes
+  yum:
+    update_cache: yes
+
+- name: Install the grafana
+  become: yes
+  yum:
+    name: grafana
+    state: present
+
+- name: Adding the prometheus repo
+  become: yes
+  copy:
+    src: centos/prometheus.repo
+    dest: /etc/yum.repos.d/
+
+- name: Updating the centos
+  become: yes
+  yum:
+    update_cache: yes
+
+
+- name: Installing the prometheus
+  become: yes
+  dnf:
+    name:
+      - prometheus2
+      - node_exporter
+    state: present
+
+- name: Adding the influxdb.repo
+  become: yes
+  copy:
+    src: centos/influxdb.repo
+    dest: /etc/yum.repos.d/
+
+- name: Update the cache
+  become: yes
+  dnf:
+    update_cache: yes
+
+- name: Install the influxdb
+  become: yes
+  dnf:
+    name: influxdb
+    state: present
+
+- name: Starting the services
+  become: yes
+  service:
+    name: influxdb
+    state: started
+    enabled: yes
+

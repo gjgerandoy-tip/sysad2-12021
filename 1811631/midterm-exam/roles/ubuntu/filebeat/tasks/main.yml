@@ -1,0 +1,29 @@
+---
+# tasks file for roles/ubuntu/filebeat
+- name: Install the filebeat
+  become: yes
+  apt:
+    name: filebeat
+    update_cache: yes
+
+- name: Get the filebeat config file
+  become: yes
+  copy:
+    src: ubuntu/filebeat.yml
+    dest: "/etc/filebeat/"
+
+- name: Enable the filebeat module
+  become: yes
+  command: filebeat modules enable system nginx mysql
+
+- name: Load the template
+  become: yes
+  command: filebeat setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'
+
+- name: Start the filebeat
+  become: yes
+  service:
+    name: filebeat
+    state: started
+    enabled: yes
+

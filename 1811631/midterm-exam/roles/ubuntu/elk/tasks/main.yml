@@ -1,0 +1,87 @@
+---
+# tasks file for roles/ubuntu/elk
+- name: Adding the gpg key
+  become: yes
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Adding the source
+  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+
+- name: Update the Ubuntu
+  become: yes
+  apt:
+    upgrade: 'yes'
+    update_cache: yes
+
+- name: Install the Elasticsearch
+  become: yes
+  apt:
+    name: elasticsearch
+    update_cache: yes
+
+- name: Update the config file to allow outside access
+  become: yes
+  lineinfile:
+    destfile: /etc/elasticsearch/elasticsearch.yml
+    regexp: 'network.host:'
+    line: 'network.host: 127.0.0.1'
+
+- name: Update the port in config file
+  become: yes
+  lineinfile:
+    destfile: /etc/elasticsearch/elasticsearch.yml
+    regexp: 'http.port:'
+    line: 'http.port: 9200'
+
+
+- name: Start the ElasticSearch
+  become: yes
+  service:
+    name: elasticsearch
+    enabled: yes
+    state: started
+
+- name: Install the Kibana
+  become: yes
+  apt:
+    name: kibana
+    update_cache: yes
+
+- name: Update the config
+  become: yes
+  replace:
+    path: /etc/kibana/kibana.yml
+    regexp: 'server.host:'
+    replace: 'server.host: "localhost"'
+  register: kibana_host
+
+- name: Defining the server port
+  become: yes
+  replace:
+    path: /etc/kibana/kibana.yml
+    regexp: 'server.port: 5601'
+    replace: 'server.port: 5601'
+  register: kibana_port
+
+- name: Defining the elasticsearch url
+  become: yes
+  replace:
+    path: /etc/kibana/kibana.yml
+    regexp: 'elasticsearch.url:'
+    replace: 'elasticsearch.url: ["https://localhost:9200"]'
+  register: kibana_url
+
+- name: Starting kibana
+  become: yes
+  service:
+    name: kibana
+    state: started
+
+- name: Restart kibana
+  become: yes
+  service:
+    name: kibana
+    state: restarted
+

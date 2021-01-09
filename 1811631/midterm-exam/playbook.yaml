@@ -1,0 +1,30 @@
+---
+- name: Install monitoring services and web services in ubuntu
+  hosts: ubuntu
+
+  roles:
+    - ubuntu/elk
+    - ubuntu/logstash
+    - ubuntu/filebeat
+    - ubuntu/gpi
+    - ubuntu/lamp
+
+
+- name: Midterm exam input config
+  hosts: centos
+  
+  tasks:
+    - name: Include config.yaml
+      include_vars:
+        file: config.yaml
+
+- name: Install monitoring services and web services in ubuntu
+  hosts: centos
+
+  roles:
+    - centos/elk
+    - centos/logstash
+    - centos/filebeat
+    - centos/nagios
+    - centos/gpi
+    - centos/lamp

@@ -1,0 +1,35 @@
+---
+# tasks file for roles/centos/filebeat
+
+- name: Install the filebeat
+  become: yes
+  yum:
+    name: filebeat
+    update_cache: yes
+
+- name: Get the filebeat config file
+  become: yes
+  copy:
+    src: centos/filebeat.yml
+    dest: "/etc/filebeat/"
+
+- name: Enable the filebeat module
+  become: yes
+  command: filebeat modules enable system nginx mysql
+
+- name: Load the template in filebeat
+  become: yes
+  command: filebeat setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'
+
+- name: Restart kibana
+  become: yes
+  service:
+    name: kibana
+    enabled: yes
+
+- name: Start the filebeat
+  become: yes
+  service:
+    name: filebeat
+    state: started
+    enabled: yes
