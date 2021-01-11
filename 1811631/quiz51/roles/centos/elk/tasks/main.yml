@@ -1,0 +1,68 @@
+---
+# tasks file for roles/centos/elk
+
+- name: Install the podman file
+  become: yes
+  yum:
+    name: podman
+    state: present
+    update_cache: yes
+
+- name: Pulling elasticsearch image
+  become: yes
+  containers.podman.podman_image:
+    name: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+
+- name: Create the elasticsearch network
+  become: yes
+  containers.podman.podman_network:
+    name: elastic
+
+- name: Create the container for elasticsearch
+  become: yes
+  containers.podman.podman_containers:
+    containers:
+      - name: elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+        state: present
+        ports:
+          - "9400:9400"
+        networks:
+          - name: elastic
+
+- name: Pulling the kibana image
+  become: yes
+  containers.podman.podman_image:
+    name: docker.elastic.co/kibana/kibana:7.10.1
+
+- name: Create the container for kibana
+  become: yes
+  containers.podman.podman_containers:
+    containers:
+      - name: kibana
+        image: docker.elastic.co/kibana/kibana:7.10.1
+        state: present
+        ports: 
+          - "5602:5602"
+        networks:
+          - name: elastic
+
+- name: Pulling the logstash image
+  become: yes
+  containers.podman.podman_image:
+    name: docker.elastic.co/logstash/logstash:7.10.1
+
+- name: Create the container for logstash
+  become: yes
+  containers.podman.podman_containers:
+    containers:
+      - name: logstash
+        image: docker.elastic.co/logstash/logstash:7.10.1
+        state: present
+        port:
+          - "5044:5044"
+        networks:
+          - name: elastic
+
+
+

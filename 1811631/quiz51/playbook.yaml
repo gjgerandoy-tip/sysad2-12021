@@ -1,0 +1,14 @@
+# Install ELK via docker in Ubuntu
+
+---
+- name: Install elk
+  hosts: ubuntu
+  roles:
+    - ubuntu/elk
+
+# Install ELK via podman in centos
+
+- name: Install elk
+  hosts: centos
+  roles:
+    - centos/elk
