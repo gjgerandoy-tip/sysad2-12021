@@ -1,4 +1,4 @@
-.
+```.
 ├── README.md
 ├── ansible.cfg
 ├── elasticsearch.repo
@@ -37,3 +37,4 @@
                 └── main.yml
 
 17 directories, 19 files
+```
