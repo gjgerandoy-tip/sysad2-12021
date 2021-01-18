@@ -1,4 +1,4 @@
-.
+```.
 ├── README.md
 ├── ansible.cfg
 ├── inventory
@@ -42,3 +42,4 @@
                 └── main.yml
 
 21 directories, 20 files
+```
