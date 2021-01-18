@@ -1,20 +1,64 @@
-# Prelim Exams
+```
+├── README.md
+├── config.yaml
+├── playbook.yaml
+└── roles
+    ├── changemotd
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── tests
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    ├── createuser
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── tests
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    ├── java
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── tests
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    └── python-pip
+        ├── README.md
+        ├── defaults
+        │   └── main.yml
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── tasks
+        │   └── main.yml
+        ├── tests
+        │   └── test.yml
+        └── vars
+            └── main.yml
 
-## <b> Directory summary </b>
-
-`~/sysad2-12021/1811631/prelim-exam/ansible.cfg` = .gitignore <br>
-`~/sysad2-12021/1811631/prelim-exam/inventory` = .gitignore<br>
-`~/sysad2-12021/1811631/prelim-exam/README.md`  <br>
-`~/sysad2-12021/1811631/prelim-exam/roles` <br>
-`~/sysad2-12021/1811631/prelim-exam/.gitignore`<br>
-
-### Localhost name used = [ubuntu]
-### In branch = prelim-exam
-
-.gitignore
-- ansible.cfg
-- inventory
-
-
-
-
+29 directories, 31 files
+```
