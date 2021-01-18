@@ -1,39 +1,35 @@
-## Directory summary for Quiz 3.1 (MIS)
+```.
+├── README.md
+├── playbook.yaml
+└── roles
+    ├── centos-setup
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── tests
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    └── ubuntu-setup
+        ├── README.md
+        ├── defaults
+        │   └── main.yml
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── tasks
+        │   └── main.yml
+        ├── tests
+        │   └── test.yml
+        └── vars
+            └── main.yml
 
-### Dir Summary
-
-`~/sysad2-12021/1811631/quiz31/README.md`<br>
-`~/sysad2-12021/1811631/quiz31/ansible.cfg` = .gitignore <br>
-`~/sysad2-12021/1811631/quiz31/iventory` = .gitignore <br>
-`~/sysad2-12021/1811631/quiz31/vsftpd.conf` = .gitignore <br>
-`~/sysad2-12021/1811631/quiz31/roles/ubuntu-setup
-						/defaults
-							/main.yml
-						/handlers
-							/main.yml
-						/meta
-							/main.yml
-						/tasks
-							/main.yml
-						/tests
-							/main.yml
-						/vars
-							/main.yml
-						/.travis.yml
-						/README.md
-					/centos-setup
-						/defaults
-							/main.yml
-						/handlers
-							/main.yml
-						/meta
-							/main.yml
-						/tasks
-							/main.yml
-						/tests
-							/main.yml
-						/vars
-							/main.yml
-						/.travis.yml
-						/README.md` <br>
-`~/sysad2-12021/1811631/quiz31/.gitignore`
+15 directories, 16 files
+```
