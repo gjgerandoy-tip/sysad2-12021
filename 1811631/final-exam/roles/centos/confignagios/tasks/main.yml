@@ -1,0 +1,76 @@
+---
+# tasks file for roles/centos/confignagios
+
+- name: Configuring nagios script
+  become: yes
+  shell: ./configure --with-command-group=nagcmd --with-command-group=nagcmd --with-httpd_conf=/etc/httpd/conf.d
+  args:
+    chdir: /downloads/nagios-4.2.1
+
+- name: Compiling nagioscore
+  become: yes
+  make:
+    chdir: /downloads/nagios-4.2.1
+    target: all
+
+- name: Installing binaries in nagios
+  become: yes
+  make:
+    chdir: /downloads/nagios-4.2.1
+    target: install
+
+- name: Installing script in nagios-4.2.1
+  become: yes
+  make:
+    chdir: /downloads/nagios-4.2.1
+    target: install-daemoninit
+
+- name: Install config files in nagios-4.2.1
+  become: yes
+  make:
+    chdir: /downloads/nagios-4.2.1
+    target: install-config
+
+- name: Installing set permissions
+  become: yes
+  make:
+    chdir: /downloads/nagios-4.2.1
+    target: install-commandmode
+
+- name: install nagios web interface
+  become: yes
+  make:
+    chdir: /downloads/nagios-4.2.1
+    target: install-webconf
+
+- name: Install pip requisite for htpasswd
+  become: yes
+  yum:
+    name: python3-pip
+    state: latest
+    update_cache: yes
+
+- name: Install htpasswd
+  become: yes
+  pip:
+    name: passlib
+    state: latest
+
+- name: Create nagiosadmin
+  become: yes
+  htpasswd:
+    path: /usr/local/nagios/etc/htpasswd.users
+    name: nagiosadmin
+    password: '{{ nagadminpass }}'
+
+- name: Restart httpd service
+  become: yes
+  service:
+    name: httpd
+    state: reloaded
+
+- name: start nagios service
+  become: yes
+  service:
+    name: nagios
+    state: started

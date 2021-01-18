@@ -1,0 +1,48 @@
+---
+# tasks file for roles/centos/configvsftpd
+
+- name: Add denyUser
+  become: yes
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "DenyUsers {{ ftpuser }}"
+  register: sshd_config
+
+- name: Restart sshd service
+  become: yes
+  service:
+    name: sshd
+    state: restarted
+  when: sshd_config.changed
+
+- name: Create ftp dir
+  become: yes
+  file:
+    path: /home/Final-Exam/ftp
+    state: directory
+    owner: '{{ ftpuser }}'
+    group: '{{ ftpuser }}'
+    mode: '0555'
+
+- name: Create files directory
+  become: yes
+  file:
+    path: /home/Final-Exam/Files
+    state: directory
+    owner: '{{ ftpuser }}'
+    group: '{{ ftpuser }}'
+    mode: '0555'
+
+- name: Copy vsftpd.conf
+  become: yes
+  copy:
+    src: vsftpd.conf
+    dest: /etc/vsftpd.conf
+  register: vsftpd_config
+
+- name: restart vsftpd
+  become: yes
+  service:
+    name: vsftpd
+    state: restarted
+  when: vsftpd_config.changed 

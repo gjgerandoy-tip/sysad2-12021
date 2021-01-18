@@ -1,0 +1,83 @@
+---
+# tasks file for roles/centos/installnagios
+
+- name: Install httpd requisite for nagios
+  become: yes
+  yum:
+     name: httpd
+     state: present
+     update_cache: yes
+
+- name: Installing the dependencies
+  become: yes
+  yum:
+    name:
+       - perl
+       - gcc
+       - glibc
+       - glibc-common
+       - unzip
+       - gd
+       - gd-devel
+       - postfix
+    state: present
+
+- name: Add group in nagios
+  become: yes
+  group:
+    name: nagios
+    state: present
+
+- name: Add second group in nagios
+  become: yes
+  group:
+    name: nagcmd
+    state: present
+
+- name: add nagios user
+  become: yes
+  user:
+    name: nagios
+    shell: /bin/bash
+    comment: nagios user
+    group: nagios
+    password: '{{ nagpass }}'
+
+- name: Add nagios user group for external
+  become: yes
+  user:
+    name: nagios
+    group: nagcmd
+    append: yes
+
+- name: Add www-data user group
+  become: yes
+  user:
+    name: www-data
+    group: nagcmd
+    append: yes
+
+- name: Create downloads directory
+  become: yes
+  file:
+    path: /downloads
+    state: directory
+
+- name: Download nagios in centos
+  become: yes
+  get_url:
+    url: http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.2.1.tar.gz
+    dest: /downloads
+
+- name: Download nagios plugins in centos
+  become: yes
+  get_url:
+    url: https://nagios-plugins.org/download/nagios-plugins-2.3.3.tar.gz
+    dest: /downloads
+
+- name: Extract the nagios downloaded
+  become: yes
+  unarchive:
+    src: /downloads/nagios-4.2.1.tar.gz
+    dest: /downloads
+    remote_src: yes

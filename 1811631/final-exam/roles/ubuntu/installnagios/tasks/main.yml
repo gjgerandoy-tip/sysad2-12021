@@ -1,0 +1,88 @@
+---
+# tasks file for roles/ubuntu/installnagios
+
+- name: Install pre-requisite on ubuntu
+  become: yes
+  apt:
+    name:
+      - unzip
+      - build-essential
+      - openssl
+      - php
+      - apache2
+      - php-gd
+      - libssl-dev
+      - libgd-dev
+      - libapache2-mod-php
+    state: latest
+    update_cache: yes
+
+- name: Add group in nagios
+  become: yes
+  group:
+    name: nagios
+    state: present
+
+- name: Add group2 in nagios
+  become: yes
+  group:
+    name: nagcmd
+    state: present
+
+- name: Add second user in nagios
+  become: yes
+  user:
+    name: nagios
+    shell: /bin/bash
+    comment: nagios user
+    group: nagios
+    password: '{{ nagadminpass }}'
+
+- name: Add external command
+  become: yes
+  user:
+    name: nagios
+    group: nagcmd
+    append: yes
+
+- name: Add www data
+  become: yes
+  user:
+    name: www-data
+    group: nagcmd
+    append: yes
+
+- name: Create download directory in home
+  become: yes
+  file:
+    path: /downloads
+    state: directory
+    owner: nobody
+    group: nogroup
+
+- name: Download nagios
+  become: yes
+  get_url:
+    url: http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.2.1.tar.gz
+    dest: /downloads
+
+- name: Download nagios plugins
+  become: yes
+  get_url:
+    url: https://nagios-plugins.org/download/nagios-plugins-2.3.3.tar.gz
+    dest: /downloads
+
+- name: Extract nagios-4.2.1
+  become: yes
+  unarchive:
+    src: /downloads/nagios-4.2.1.tar.gz
+    dest: /downloads
+    remote_src: yes
+
+
+
+
+
+
+
+

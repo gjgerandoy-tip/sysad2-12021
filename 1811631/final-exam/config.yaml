@@ -1,0 +1,8 @@
+gitclone: "https://github.com/gjgerandoy-tip/sysad2-12021.git"
+username: "gjgerandoy-tip"
+ftpuser: "imnewftp"
+ftppass: "$5$1bdWbmekGCPCVmH$G1yblk4N3eAKezRcJ33//3joAIPmVEiYkwYpB8mseC9"
+nagadminpass: "$5$pT4dKezR$CUtVYOqT4GzjlABSV2hPNCmJhy/2CKd5FptF/frpZu3"
+nagadmin: "newnagadmin"
+nagpass: "$1$TahRiLNc4nJAizk4jsfJY9geoKWE8C1"
+
