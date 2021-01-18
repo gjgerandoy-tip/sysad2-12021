@@ -1,4 +1,4 @@
-.
+```.
 ├── README.md
 ├── ansible.cfg
 ├── edit.html
@@ -22,3 +22,4 @@
             └── main.yml
 
 8 directories, 13 files
+```
