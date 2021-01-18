@@ -1,15 +1,37 @@
-### Quiz 3.2 Important File Directory 
+```.
+├── README.md
+├── playbook.yaml
+├── quiz32.com.conf
+├── roles
+│   ├── centos-setup
+│   │   ├── README.md
+│   │   ├── defaults
+│   │   │   └── main.yml
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   ├── meta
+│   │   │   └── main.yml
+│   │   ├── tasks
+│   │   │   └── main.yml
+│   │   ├── tests
+│   │   │   └── test.yml
+│   │   └── vars
+│   │       └── main.yml
+│   └── ubuntu-setup
+│       ├── README.md
+│       ├── defaults
+│       │   └── main.yml
+│       ├── handlers
+│       │   └── main.yml
+│       ├── meta
+│       │   └── main.yml
+│       ├── tasks
+│       │   └── main.yml
+│       ├── tests
+│       │   └── test.yml
+│       └── vars
+│           └── main.yml
+└── ~
 
-`~/sysad2-12021/1811631/quiz32/README.md`  <br>
-`~/sysad2-12021/1811631/quiz32/ansible.cfg` = .gitignore <br>
-`~/sysad2-12021/1811631/quiz32/inventory` = .gitignore <br>
-
-`~/sysad2-12021/1811631/quiz32/roles/ubuntu-setup/
-						tasks/
-							main.yml`<br>
-`~/sysad2-12021/1811631/quiz32/roles/centos-setup/
-						tasks/
-							main.yml`<br>
-
-`~/sysad2-12021/1811631/quiz32/quiz32.com.conf` <b> (For apache in CentOS) </b>
-					
+15 directories, 18 files
+```
