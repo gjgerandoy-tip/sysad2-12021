@@ -1,4 +1,4 @@
-```
+```.
 ├── README.md
 ├── config.yaml
 ├── playbook.yaml
@@ -62,4 +62,3 @@
 
 29 directories, 31 files
 ```
-a
