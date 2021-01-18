@@ -1,4 +1,4 @@
-.
+```.
 ├── README.md
 ├── ansible.cfg
 ├── centos
@@ -211,3 +211,4 @@
     └── filebeat.yml
 
 104 directories, 106 files
+```
