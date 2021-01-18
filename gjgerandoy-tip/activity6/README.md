@@ -1,20 +1,39 @@
-## Hands-on Activity 6
+```.
+├── README.md
+├── ansible.cfg
+├── inventory
+├── playbook.yaml
+└── roles
+    ├── centos-server
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    └── ubuntu-server
+        ├── README.md
+        ├── defaults
+        │   └── main.yml
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── tasks
+        │   └── main.yml
+        ├── tests
+        │   ├── inventory
+        │   └── test.yml
+        └── vars
+            └── main.yml
 
-### Important File Summary
-
-** Install vsftpd, dhcp , bind9, httpd, mariadb, samba
-
- `~/sysad2-12021/gjgerandoy-tip/activity6/README.md`
- `~/sysad2-12021/gjgerandoy-tip/activity6/ansible.cfg`
- `~/sysad2-12021/gjgerandoy-tip/activity6/inventory`
- `~/sysad2-12021/gjgerandoy-tip/Activity6/playbook.yaml`
- `~/sysad2-12021/gjgerandoy-tip/activity6/roles
- 						/ubuntu-server
-								/tasks
-									/main.yml`
-
-`~/sysad2-12021/gjgerandoy-tip/activity6/roles
-						/centos-server
-								/tasks
-									/main.yml`
-
+15 directories, 20 files
+```
