@@ -5,7 +5,9 @@
 - name: Install vsftpd for Ubuntu
   become: yes
   apt:
-    name: vsftpd
+    name:
+      - vsftpd
+      - ufw
     state: latest
     update_cache: yes
 

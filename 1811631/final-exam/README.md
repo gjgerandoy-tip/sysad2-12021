@@ -91,7 +91,7 @@
 │   │       │   └── test.yml
 │   │       └── vars
 │   │           └── main.yml
-│   ├── opensuse
+│   ├── debian
 │   │   ├── confignagios
 │   │   │   ├── README.md
 │   │   │   ├── defaults
@@ -177,7 +177,7 @@
 │   │       │   └── test.yml
 │   │       └── vars
 │   │           └── main.yml
-│   └── ubuntu
+│   └── opensuse
 │       ├── confignagios
 │       │   ├── README.md
 │       │   ├── defaults

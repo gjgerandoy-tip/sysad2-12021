@@ -63,8 +63,8 @@
 
 - name: Install htpasswd module
   become: yes
-  pip:
-    name: passlib
+  apt:
+    name: python-passlib
     state: latest
 
 - name: Create nagiosadmin
